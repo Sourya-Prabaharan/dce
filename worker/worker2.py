@@ -2,11 +2,55 @@ from protocol.tcp_server import TCPServer
 from protocol.tcp_client import TCPClient
 import threading
 import time
+import subprocess
+import tempfile
 
 WORKER_ID = "worker2"
 MASTER_HOST = "127.0.0.1"
 MASTER_PORT = 9000
 WORKER_PORT = 9102
+
+def run_job_in_docker(job_id, code):
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".py") as tmp:
+        tmp.write(code.encode())
+        tmp_path = tmp.name
+
+    print(f"[WORKER2] Saved code to {tmp_path}")
+
+    cmd = [
+        "docker", "run", "--rm",
+        "-v", f"{tmp_path}:/app/job.py",
+        "python:3.10",
+        "python", "/app/job.py"
+    ]
+
+    try:
+        output = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+        output_text = output.decode()
+    except subprocess.CalledProcessError as e:
+        output_text = e.output.decode()
+
+    return output_text
+
+def handle_master_message(msg: str) -> str:
+    print(f"[WORKER2] Received:", msg)
+
+    parts = msg.split()
+
+    if parts[0] == "RUN":
+        job_id = parts[1]
+        code = msg.split("\n", 1)[1]
+
+        print(f"[WORKER2] Running job {job_id} in Docker")
+        output = run_job_in_docker(job_id, code)
+
+        client = TCPClient(MASTER_HOST, MASTER_PORT)
+        payload = f"DONE {job_id} {len(output)}\n{output}"
+        client.send(payload)
+
+        return f"ACK RUN {job_id}"
+
+    return "ERR"
 
 def heartbeat_loop():
     client = TCPClient(MASTER_HOST, MASTER_PORT)
@@ -16,25 +60,6 @@ def heartbeat_loop():
         except:
             pass
         time.sleep(5)
-
-def handle_master_message(msg: str) -> str:
-    print(f"[WORKER2] Received:", msg)
-
-    parts = msg.split()
-
-    if parts[0] == "RUN":
-        job_id = parts[1]
-        code = msg.split("\n", 1)[1] if "\n" in msg else ""
-
-        print(f"[WORKER2] Running job {job_id} (fake run)")
-        time.sleep(1)
-
-        client = TCPClient(MASTER_HOST, MASTER_PORT)
-        client.send(f"DONE {job_id} 0\n")
-
-        return f"ACK RUN {job_id}"
-
-    return "ERR"
 
 if __name__ == "__main__":
     threading.Thread(target=heartbeat_loop, daemon=True).start()

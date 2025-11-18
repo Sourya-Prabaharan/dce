@@ -12,12 +12,12 @@ workers = {
 
 # =====================================================
 # JOB STATE
-# jobID → {"code": str, "status": "QUEUED/RUNNING/DONE", "logs": ""}
+# jobID → {"code": str, "status": "QUEUED/RUNNING/DONE", "logs": str}
 # =====================================================
 jobs = {}
 
 # =====================================================
-# ASSIGN JOB TO WORKER
+# Assign job to an idle worker
 # =====================================================
 def assign_job(job_id, code):
     for wid, w in workers.items():
@@ -32,9 +32,10 @@ def assign_job(job_id, code):
             # mark worker busy and job running
             workers[wid]["status"] = "busy"
             jobs[job_id]["status"] = "RUNNING"
+            jobs[job_id]["worker"] = wid
             return wid
 
-    return None  # no free workers
+    return None  # no free workers available
 
 
 # =====================================================
@@ -45,19 +46,19 @@ def handle_message(msg: str) -> str:
     parts = msg.strip().split()
 
     # -------------------------------------------------
-    # HANDLE SUBMIT
+    # SUBMIT job
     # -------------------------------------------------
     if parts[0] == "SUBMIT":
         job_id = parts[1]
-        code = msg.split("\n", 1)[1]   # everything after newline
+        code = msg.split("\n", 1)[1]
 
         jobs[job_id] = {
             "code": code,
             "status": "QUEUED",
             "logs": "",
+            "worker": None,
         }
 
-        # Try assigning immediately
         assigned = assign_job(job_id, code)
         if assigned:
             return f"JOB {job_id} ASSIGNED TO {assigned}"
@@ -65,7 +66,7 @@ def handle_message(msg: str) -> str:
             return f"JOB {job_id} QUEUED"
 
     # -------------------------------------------------
-    # HANDLE STATUS
+    # STATUS job
     # -------------------------------------------------
     if parts[0] == "STATUS":
         job_id = parts[1]
@@ -74,28 +75,35 @@ def handle_message(msg: str) -> str:
         return f"STATUS {job_id} {jobs[job_id]['status']}"
 
     # -------------------------------------------------
-    # HANDLE LOGS
+    # LOGS job
     # -------------------------------------------------
     if parts[0] == "LOGS":
         job_id = parts[1]
         if job_id not in jobs:
             return "ERROR: job not found"
-        return f"LOGS {job_id}\n{jobs[job_id]['logs']}"
+        logs = jobs[job_id]["logs"]
+        return f"LOGS {job_id}\n{logs}"
 
     # -------------------------------------------------
-    # HANDLE DONE FROM WORKER
-    # DONE <jobID> <output_size>\n<output>
+    # DONE job (from worker)
+    # DONE job1 <size>\n<output>
     # -------------------------------------------------
     if parts[0] == "DONE":
         job_id = parts[1]
-        print(f"[MASTER] Job {job_id} completed")
+
+        # Output is after the newline
+        output = msg.split("\n", 1)[1] if "\n" in msg else ""
 
         jobs[job_id]["status"] = "DONE"
+        jobs[job_id]["logs"] = output
 
-        # free the worker
-        for wid in workers:
-            if workers[wid]["status"] == "busy":
-                workers[wid]["status"] = "idle"
+        worker_used = jobs[job_id]["worker"]
+        if worker_used:
+            workers[worker_used]["status"] = "idle"
+
+        print(f"[MASTER] Job {job_id} completed with output:")
+        print(output)
+
         return f"ACK DONE {job_id}"
 
     # -------------------------------------------------
@@ -103,14 +111,13 @@ def handle_message(msg: str) -> str:
     # -------------------------------------------------
     if parts[0] == "HEARTBEAT":
         wid = parts[1]
-        # (Later we will track last heartbeat timestamp)
         return f"ACK HEARTBEAT {wid}"
 
     return "ERROR: unknown command"
 
 
 # =====================================================
-# START MASTER SERVER
+# START SERVER
 # =====================================================
 if __name__ == "__main__":
     print("[MASTER] Starting on port 9000")
