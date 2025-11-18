@@ -1,1 +1,1 @@
-print("hello from distributed compute engine")
+import time; time.sleep(5); print("done!")
