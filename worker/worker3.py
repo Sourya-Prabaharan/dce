@@ -15,7 +15,7 @@ def run_job_in_docker(job_id, code):
         tmp.write(code.encode())
         tmp_path = tmp.name
 
-    print(f"[WORKER3] Saved code to {tmp_path}")
+    print(f"[WORKER worker3] Prepared task {job_id}")
 
     cmd = [
         "docker", "run", "--rm",
@@ -33,16 +33,16 @@ def run_job_in_docker(job_id, code):
     return output_text
 
 def handle_master_message(msg: str) -> str:
-    print(f"[WORKER3] Received:", msg)
-
     parts = msg.split()
 
     if parts[0] == "RUN":
         job_id = parts[1]
         code = msg.split("\n", 1)[1]
 
-        print(f"[WORKER3] Running job {job_id} in Docker")
+        print(f"[WORKER worker3] Received task {job_id}")
+        print(f"[WORKER worker3] Running task {job_id} in Docker")
         output = run_job_in_docker(job_id, code)
+        print(f"[WORKER worker3] Completed task {job_id}")
 
         client = TCPClient(MASTER_HOST, MASTER_PORT)
         payload = f"DONE {job_id} {len(output)}\n{output}"
@@ -65,6 +65,5 @@ if __name__ == "__main__":
     threading.Thread(target=heartbeat_loop, daemon=True).start()
 
     server = TCPServer("0.0.0.0", WORKER_PORT, handle_master_message)
-    print(f"[WORKER3] Listening on port {WORKER_PORT}")
+    print(f"[WORKER worker3] Listening on port {WORKER_PORT}")
     server.start()
-

@@ -28,20 +28,21 @@ def assign_job(job_id, code):
         # worker must be alive and idle
         if w["status"] == "idle" and w["last_heartbeat"] != 0:
 
-            print(f"[MASTER] Assigning job {job_id} to {wid}")
+            print(f"[SCHEDULER] Assigned task {job_id} to {wid}")
 
             try:
                 client = TCPClient(w["host"], w["port"])
                 payload = f"RUN {job_id} {len(code)}\n{code}"
                 client.send(payload)
             except:
-                print(f"[MASTER] Worker {wid} unreachable — marking dead")
+                print(f"[MASTER] Worker {wid} unreachable - marking dead")
                 w["status"] = "dead"
                 continue
 
             workers[wid]["status"] = "busy"
             jobs[job_id]["status"] = "RUNNING"
             jobs[job_id]["worker"] = wid
+            jobs[job_id]["started_at"] = time.time()
             return wid
 
     return None
@@ -62,7 +63,7 @@ def scheduler_loop():
 
         assigned = assign_job(job_id, code)
         if assigned:
-            print(f"[MASTER] Scheduled queued job {job_id}")
+            print(f"[SCHEDULER] Scheduled queued task {job_id}")
             job_queue.pop(0)  # remove from queue
 
 
@@ -70,7 +71,9 @@ def scheduler_loop():
 # MESSAGE HANDLER
 # =====================================================
 def handle_message(msg: str) -> str:
-    print("[MASTER] Received:", msg)
+    if not msg.strip():
+        return "ERROR: empty message"
+
     parts = msg.strip().split()
     cmd = parts[0]
 
@@ -81,11 +84,16 @@ def handle_message(msg: str) -> str:
         job_id = parts[1]
         code = msg.split("\n", 1)[1]
 
+        print(f"[MASTER] Job {job_id} received ({len(code)} bytes)")
+
         jobs[job_id] = {
             "code": code,
             "status": "QUEUED",
             "logs": "",
             "worker": None,
+            "submitted_at": time.time(),
+            "started_at": None,
+            "completed_at": None,
         }
 
         # Try direct assignment
@@ -123,13 +131,18 @@ def handle_message(msg: str) -> str:
 
         jobs[job_id]["status"] = "DONE"
         jobs[job_id]["logs"] = output
+        jobs[job_id]["completed_at"] = time.time()
 
         wid = jobs[job_id]["worker"]
         if wid:
             workers[wid]["status"] = "idle"
 
-        print(f"[MASTER] Job {job_id} completed with output:")
+        started_at = jobs[job_id]["started_at"] or jobs[job_id]["submitted_at"]
+        elapsed_ms = int((jobs[job_id]["completed_at"] - started_at) * 1000)
+
+        print(f"[RESULT] {wid or 'worker'} completed task {job_id}")
         print(output)
+        print(f"[FINAL] Distributed job {job_id} completed in {elapsed_ms} ms")
 
         return f"ACK DONE {job_id}"
 
@@ -139,9 +152,13 @@ def handle_message(msg: str) -> str:
     if cmd == "HEARTBEAT":
         wid = parts[1]
         if wid in workers:
+            first_seen = workers[wid]["last_heartbeat"] == 0
             workers[wid]["last_heartbeat"] = time.time()
             if workers[wid]["status"] == "dead":
                 workers[wid]["status"] = "idle"
+            if first_seen:
+                print(f"[MASTER] {wid} connected from {workers[wid]['host']}:{workers[wid]['port']}")
+            print(f"[HEARTBEAT] {wid} alive")
         return f"ACK HEARTBEAT {wid}"
 
     return "ERROR: unknown command"
@@ -165,13 +182,13 @@ def worker_monitor():
             # Timeout → worker dead
             if now - w["last_heartbeat"] > HEARTBEAT_TIMEOUT:
                 if w["status"] != "dead":
-                    print(f"[MASTER] Worker {wid} appears DEAD")
+                    print(f"[MASTER] Worker {wid} missed heartbeat - marking dead")
                     w["status"] = "dead"
 
                     # Requeue running job
                     for job_id, job in jobs.items():
                         if job["worker"] == wid and job["status"] == "RUNNING":
-                            print(f"[MASTER] Requeueing job {job_id}")
+                            print(f"[SCHEDULER] Requeueing task {job_id}")
                             job["status"] = "QUEUED"
                             job["worker"] = None
                             job_queue.append(job_id)
@@ -181,7 +198,8 @@ def worker_monitor():
 # START SERVER + THREADS
 # =====================================================
 if __name__ == "__main__":
-    print("[MASTER] Starting on port 9000")
+    print("[MASTER] Starting Distributed Compute Engine on port 9000")
+    print("[MASTER] Waiting for workers on ports 9101, 9102, and 9103")
 
     # Start scheduler thread
     threading.Thread(target=scheduler_loop, daemon=True).start()
@@ -191,4 +209,3 @@ if __name__ == "__main__":
 
     # Start TCP Server
     TCPServer("0.0.0.0", 9000, handle_message).start()
-

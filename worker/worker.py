@@ -19,8 +19,6 @@ def heartbeat_loop():
         time.sleep(5)
 
 def handle_master_message(msg: str) -> str:
-    print(f"[WORKER {WORKER_ID}] Received:", msg)
-
     parts = msg.split()
 
     if parts[0] == "RUN":
@@ -28,7 +26,8 @@ def handle_master_message(msg: str) -> str:
         code = msg.split("\n", 1)[1]
 
         # TEMP: Just fake run (Phase 4 will execute Docker)
-        print(f"[WORKER {WORKER_ID}] Running job {job_id}")
+        print(f"[WORKER {WORKER_ID}] Received task {job_id}")
+        print(f"[WORKER {WORKER_ID}] Running task {job_id}")
         time.sleep(1)
 
         # Send completion back to master
@@ -47,4 +46,3 @@ if __name__ == "__main__":
     server = TCPServer("0.0.0.0", WORKER_PORT, handle_master_message)
     print(f"[WORKER {WORKER_ID}] Listening on port {WORKER_PORT}")
     server.start()
-
