@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Distributed Compute Engine — Portfolio Project</title>
+  <meta name="description" content="A Python TCP master/worker distributed compute engine with heartbeat-based health tracking, FIFO job scheduling, Docker-backed execution, and failure recovery. Built by Sourya Prabaharan." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ========== NAVIGATION ========== -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">DCE</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#simulation" class="nav-link">Live Demo</a>
+        <a href="#code" class="nav-link">Code</a>
+        <a href="#tech" class="nav-link">Stack</a>
+        <a href="https://github.com/Sourya-Prabaharan/dce" target="_blank" class="nav-link nav-github">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Systems Programming Project
+      </div>
+      <h1 id="hero-title">
+        Distributed<br />
+        <span class="gradient-text">Compute Engine</span>
+      </h1>
+      <p class="hero-subtitle">
+        A Python TCP master/worker system with heartbeat-based health tracking,
+        FIFO job scheduling, Docker-backed execution, and automatic failure recovery.
+      </p>
+      <div class="hero-actions">
+        <a href="#simulation" class="btn btn-primary" id="hero-demo-btn">
+          <span class="btn-icon">▶</span>
+          Live Demo
+        </a>
+        <a href="#architecture" class="btn btn-secondary" id="hero-arch-btn">
+          View Architecture
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">3</span>
+          <span class="stat-label">Worker Nodes</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">TCP</span>
+          <span class="stat-label">Sockets Protocol</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">FIFO</span>
+          <span class="stat-label">Job Queue</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">Auto</span>
+          <span class="stat-label">Failure Recovery</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section id="features">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Core Capabilities</span>
+        <h2>What It Does</h2>
+        <p class="section-desc">The engine covers the essential building blocks of a distributed job runner.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card" id="feature-master">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </div>
+          <h3>Master Node</h3>
+          <p>Accepts job submissions over TCP, manages the worker registry, and routes work to available nodes.</p>
+        </div>
+        <div class="feature-card" id="feature-scheduler">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>FIFO Scheduling</h3>
+          <p>When all workers are busy, jobs enter a FIFO queue and are dispatched as workers become idle.</p>
+        </div>
+        <div class="feature-card" id="feature-heartbeat">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+          </div>
+          <h3>Heartbeat Monitoring</h3>
+          <p>Workers send periodic heartbeat messages so the master can detect unavailable nodes within seconds.</p>
+        </div>
+        <div class="feature-card" id="feature-failover">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6"/><path d="M2.5 12A10 10 0 0 1 21.5 8"/><path d="M21.5 12A10 10 0 0 1 2.5 16"/></svg>
+          </div>
+          <h3>Failure Recovery</h3>
+          <p>If a worker dies, the master requeues its running job and reassigns it to a healthy node automatically.</p>
+        </div>
+        <div class="feature-card" id="feature-docker">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="6" x2="6" y2="18"/><line x1="10" y1="6" x2="10" y2="18"/><line x1="14" y1="6" x2="14" y2="18"/><line x1="18" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <h3>Docker Execution</h3>
+          <p>Worker nodes execute Python jobs inside isolated Docker containers for sandboxed, reproducible runs.</p>
+        </div>
+        <div class="feature-card" id="feature-shell">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <h3>CLI Shell</h3>
+          <p>An interactive command shell (<code>dcesh</code>) for submitting jobs, checking status, and reading logs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ARCHITECTURE ========== -->
+  <section id="architecture">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">System Design</span>
+        <h2>Architecture</h2>
+        <p class="section-desc">A visual breakdown of how components communicate through the TCP protocol.</p>
+      </div>
+      <div class="arch-diagram" id="arch-diagram">
+        <!-- Client -->
+        <div class="arch-node arch-client" id="arch-client">
+          <div class="arch-node-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <span class="arch-node-label">Client / dcesh</span>
+          <span class="arch-node-detail">Submit jobs & read logs</span>
+        </div>
+        <!-- Arrow Client → Master -->
+        <div class="arch-arrow arch-arrow-client-master">
+          <div class="arch-arrow-line"></div>
+          <span class="arch-arrow-label">SUBMIT / STATUS / LOGS</span>
+        </div>
+        <!-- Master -->
+        <div class="arch-node arch-master" id="arch-master">
+          <div class="arch-node-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </div>
+          <span class="arch-node-label">Master Node</span>
+          <span class="arch-node-detail">Port 9000 · Scheduler · Health Monitor</span>
+        </div>
+        <!-- Arrow Master → Workers -->
+        <div class="arch-arrow arch-arrow-master-workers">
+          <div class="arch-arrow-line"></div>
+          <span class="arch-arrow-label">RUN job / HEARTBEAT ACK</span>
+        </div>
+        <!-- Workers row -->
+        <div class="arch-workers-row">
+          <div class="arch-node arch-worker" id="arch-worker1">
+            <div class="arch-node-status arch-status-idle"></div>
+            <div class="arch-node-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+            </div>
+            <span class="arch-node-label">Worker 1</span>
+            <span class="arch-node-detail">Port 9101</span>
+          </div>
+          <div class="arch-node arch-worker" id="arch-worker2">
+            <div class="arch-node-status arch-status-idle"></div>
+            <div class="arch-node-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+            </div>
+            <span class="arch-node-label">Worker 2</span>
+            <span class="arch-node-detail">Port 9102</span>
+          </div>
+          <div class="arch-node arch-worker" id="arch-worker3">
+            <div class="arch-node-status arch-status-idle"></div>
+            <div class="arch-node-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>
+            </div>
+            <span class="arch-node-label">Worker 3</span>
+            <span class="arch-node-detail">Port 9103</span>
+          </div>
+        </div>
+        <!-- Arrow Workers → Result -->
+        <div class="arch-arrow arch-arrow-workers-result">
+          <div class="arch-arrow-line"></div>
+          <span class="arch-arrow-label">DONE + output</span>
+        </div>
+        <!-- Result Aggregator -->
+        <div class="arch-node arch-result" id="arch-result">
+          <div class="arch-node-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <span class="arch-node-label">Result Aggregator</span>
+          <span class="arch-node-detail">Logs & output storage</span>
+        </div>
+        <!-- Heartbeat overlay -->
+        <div class="arch-heartbeat-lines">
+          <div class="heartbeat-pulse hb-1"></div>
+          <div class="heartbeat-pulse hb-2"></div>
+          <div class="heartbeat-pulse hb-3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INTERACTIVE SIMULATION ========== -->
+  <section id="simulation">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Interactive</span>
+        <h2>Live Simulation</h2>
+        <p class="section-desc">
+          Watch the distributed compute engine in action. Submit jobs, observe scheduling,
+          and kill workers to see automatic failure recovery.
+        </p>
+      </div>
+      <div class="sim-wrapper">
+        <!-- Controls -->
+        <div class="sim-controls" id="sim-controls">
+          <button class="sim-btn sim-btn-submit" id="sim-submit-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Submit Job
+          </button>
+          <button class="sim-btn sim-btn-kill" id="sim-kill-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            Kill Worker
+          </button>
+          <button class="sim-btn sim-btn-revive" id="sim-revive-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Revive Workers
+          </button>
+          <button class="sim-btn sim-btn-reset" id="sim-reset-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6"/><path d="M2.5 12A10 10 0 0 1 21.5 8"/><path d="M21.5 12A10 10 0 0 1 2.5 16"/></svg>
+            Reset
+          </button>
+        </div>
+
+        <div class="sim-layout">
+          <!-- Simulation Canvas -->
+          <div class="sim-canvas" id="sim-canvas">
+            <!-- Master Node -->
+            <div class="sim-node sim-master-node" id="sim-master">
+              <div class="sim-node-ring"></div>
+              <div class="sim-node-inner">
+                <span class="sim-node-emoji">🖥️</span>
+                <span class="sim-node-name">Master</span>
+                <span class="sim-node-port">:9000</span>
+              </div>
+            </div>
+
+            <!-- Queue display -->
+            <div class="sim-queue" id="sim-queue">
+              <span class="sim-queue-label">Queue</span>
+              <div class="sim-queue-items" id="sim-queue-items"></div>
+            </div>
+
+            <!-- Workers -->
+            <div class="sim-workers" id="sim-workers">
+              <div class="sim-node sim-worker-node" data-worker="worker1" id="sim-worker1">
+                <div class="sim-node-ring"></div>
+                <div class="sim-node-inner">
+                  <span class="sim-node-emoji">⚙️</span>
+                  <span class="sim-node-name">Worker 1</span>
+                  <span class="sim-node-port">:9101</span>
+                  <span class="sim-node-status" id="sim-w1-status">idle</span>
+                </div>
+                <div class="sim-heartbeat-indicator" id="sim-w1-hb">
+                  <span class="hb-dot"></span>
+                </div>
+              </div>
+              <div class="sim-node sim-worker-node" data-worker="worker2" id="sim-worker2">
+                <div class="sim-node-ring"></div>
+                <div class="sim-node-inner">
+                  <span class="sim-node-emoji">⚙️</span>
+                  <span class="sim-node-name">Worker 2</span>
+                  <span class="sim-node-port">:9102</span>
+                  <span class="sim-node-status" id="sim-w2-status">idle</span>
+                </div>
+                <div class="sim-heartbeat-indicator" id="sim-w2-hb">
+                  <span class="hb-dot"></span>
+                </div>
+              </div>
+              <div class="sim-node sim-worker-node" data-worker="worker3" id="sim-worker3">
+                <div class="sim-node-ring"></div>
+                <div class="sim-node-inner">
+                  <span class="sim-node-emoji">⚙️</span>
+                  <span class="sim-node-name">Worker 3</span>
+                  <span class="sim-node-port">:9103</span>
+                  <span class="sim-node-status" id="sim-w3-status">idle</span>
+                </div>
+                <div class="sim-heartbeat-indicator" id="sim-w3-hb">
+                  <span class="hb-dot"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Animated message particles (added dynamically via JS) -->
+          </div>
+
+          <!-- Event Log -->
+          <div class="sim-log-panel" id="sim-log-panel">
+            <div class="sim-log-header">
+              <span class="sim-log-title">Event Log</span>
+              <span class="sim-log-dot"></span>
+            </div>
+            <div class="sim-log" id="sim-log">
+              <div class="log-entry log-system">[SYSTEM] Simulation ready. Submit a job to begin.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CODE WALKTHROUGH ========== -->
+  <section id="code">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Implementation</span>
+        <h2>Code Walkthrough</h2>
+        <p class="section-desc">Key excerpts from the codebase showing how each component works.</p>
+      </div>
+      <div class="code-tabs" id="code-tabs">
+        <button class="code-tab active" data-tab="master">Master Node</button>
+        <button class="code-tab" data-tab="worker">Worker</button>
+        <button class="code-tab" data-tab="protocol">Protocol</button>
+        <button class="code-tab" data-tab="scheduler">Scheduler</button>
+        <button class="code-tab" data-tab="heartbeat">Heartbeat</button>
+      </div>
+      <div class="code-panels">
+        <div class="code-panel active" id="panel-master">
+          <div class="code-panel-header">
+            <span class="code-filename">master/master.py</span>
+            <span class="code-lang">Python</span>
+          </div>
+          <pre><code><span class="kw">from</span> protocol.tcp_server <span class="kw">import</span> TCPServer
+<span class="kw">from</span> protocol.tcp_client <span class="kw">import</span> TCPClient
+<span class="kw">import</span> time, threading
+
+<span class="cm"># Worker registry with health tracking</span>
+workers = {
+    <span class="str">"worker1"</span>: {<span class="str">"host"</span>: <span class="str">"127.0.0.1"</span>, <span class="str">"port"</span>: <span class="num">9101</span>, <span class="str">"status"</span>: <span class="str">"idle"</span>},
+    <span class="str">"worker2"</span>: {<span class="str">"host"</span>: <span class="str">"127.0.0.1"</span>, <span class="str">"port"</span>: <span class="num">9102</span>, <span class="str">"status"</span>: <span class="str">"idle"</span>},
+    <span class="str">"worker3"</span>: {<span class="str">"host"</span>: <span class="str">"127.0.0.1"</span>, <span class="str">"port"</span>: <span class="num">9103</span>, <span class="str">"status"</span>: <span class="str">"idle"</span>},
+}
+
+jobs = {}
+job_queue = []  <span class="cm"># FIFO order of waiting jobs</span>
+
+<span class="kw">def</span> <span class="fn">handle_message</span>(msg: <span class="type">str</span>) -> <span class="type">str</span>:
+    parts = msg.strip().split()
+    cmd = parts[<span class="num">0</span>]
+
+    <span class="kw">if</span> cmd == <span class="str">"SUBMIT"</span>:
+        job_id = parts[<span class="num">1</span>]
+        code = msg.split(<span class="str">"\n"</span>, <span class="num">1</span>)[<span class="num">1</span>]
+        jobs[job_id] = {<span class="str">"code"</span>: code, <span class="str">"status"</span>: <span class="str">"QUEUED"</span>}
+        assigned = assign_job(job_id, code)
+        <span class="kw">if</span> assigned:
+            <span class="kw">return</span> <span class="str">f"JOB {job_id} ASSIGNED TO {assigned}"</span>
+        job_queue.append(job_id)
+        <span class="kw">return</span> <span class="str">f"JOB {job_id} QUEUED"</span>
+
+<span class="kw">if</span> __name__ == <span class="str">"__main__"</span>:
+    threading.Thread(target=scheduler_loop, daemon=<span class="num">True</span>).start()
+    threading.Thread(target=worker_monitor, daemon=<span class="num">True</span>).start()
+    TCPServer(<span class="str">"0.0.0.0"</span>, <span class="num">9000</span>, handle_message).start()</code></pre>
+        </div>
+        <div class="code-panel" id="panel-worker">
+          <div class="code-panel-header">
+            <span class="code-filename">worker/worker1.py</span>
+            <span class="code-lang">Python</span>
+          </div>
+          <pre><code><span class="kw">import</span> subprocess, tempfile
+
+<span class="kw">def</span> <span class="fn">run_job_in_docker</span>(job_id, code):
+    <span class="cm"># Save code to temporary file</span>
+    <span class="kw">with</span> tempfile.NamedTemporaryFile(
+        delete=<span class="num">False</span>, suffix=<span class="str">".py"</span>
+    ) <span class="kw">as</span> tmp:
+        tmp.write(code.encode())
+        tmp_path = tmp.name
+
+    <span class="cm"># Execute inside Docker container</span>
+    cmd = [
+        <span class="str">"docker"</span>, <span class="str">"run"</span>, <span class="str">"--rm"</span>,
+        <span class="str">"-v"</span>, <span class="str">f"{tmp_path}:/app/job.py"</span>,
+        <span class="str">"python:3.10"</span>,
+        <span class="str">"python"</span>, <span class="str">"/app/job.py"</span>
+    ]
+
+    output = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+    <span class="kw">return</span> output.decode()
+
+<span class="kw">def</span> <span class="fn">handle_master_message</span>(msg: <span class="type">str</span>) -> <span class="type">str</span>:
+    parts = msg.split()
+    <span class="kw">if</span> parts[<span class="num">0</span>] == <span class="str">"RUN"</span>:
+        job_id = parts[<span class="num">1</span>]
+        code = msg.split(<span class="str">"\n"</span>, <span class="num">1</span>)[<span class="num">1</span>]
+        output = run_job_in_docker(job_id, code)
+        <span class="cm"># Send result back to master</span>
+        client = TCPClient(MASTER_HOST, MASTER_PORT)
+        client.send(<span class="str">f"DONE {job_id} {len(output)}\n{output}"</span>)
+        <span class="kw">return</span> <span class="str">f"ACK RUN {job_id}"</span></code></pre>
+        </div>
+        <div class="code-panel" id="panel-protocol">
+          <div class="code-panel-header">
+            <span class="code-filename">protocol/tcp_server.py & tcp_client.py</span>
+            <span class="code-lang">Python</span>
+          </div>
+          <pre><code><span class="kw">import</span> socket, threading
+
+<span class="kw">class</span> <span class="type">TCPServer</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, host, port, handler):
+        self.host = host
+        self.port = port
+        self.handler = handler
+
+    <span class="kw">def</span> <span class="fn">start</span>(self):
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="num">1</span>)
+        server.bind((self.host, self.port))
+        server.listen(<span class="num">5</span>)
+
+        <span class="kw">while</span> <span class="num">True</span>:
+            client_socket, addr = server.accept()
+            threading.Thread(
+                target=self._handle_client,
+                args=(client_socket, addr),
+                daemon=<span class="num">True</span>
+            ).start()
+
+<span class="kw">class</span> <span class="type">TCPClient</span>:
+    <span class="kw">def</span> <span class="fn">send</span>(self, data: <span class="type">str</span>) -> <span class="type">str</span>:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((self.host, self.port))
+        sock.sendall(data.encode())
+        <span class="cm"># Read full response</span>
+        response = []
+        <span class="kw">while</span> <span class="num">True</span>:
+            chunk = sock.recv(<span class="num">4096</span>)
+            <span class="kw">if not</span> chunk: <span class="kw">break</span>
+            response.append(chunk.decode())
+        sock.close()
+        <span class="kw">return</span> <span class="str">""</span>.join(response)</code></pre>
+        </div>
+        <div class="code-panel" id="panel-scheduler">
+          <div class="code-panel-header">
+            <span class="code-filename">master/master.py — Scheduler</span>
+            <span class="code-lang">Python</span>
+          </div>
+          <pre><code><span class="kw">def</span> <span class="fn">assign_job</span>(job_id, code):
+    <span class="cm">"""Assign a job to the first idle, alive worker."""</span>
+    <span class="kw">for</span> wid, w <span class="kw">in</span> workers.items():
+        <span class="kw">if</span> w[<span class="str">"status"</span>] == <span class="str">"idle"</span> <span class="kw">and</span> w[<span class="str">"last_heartbeat"</span>] != <span class="num">0</span>:
+            client = TCPClient(w[<span class="str">"host"</span>], w[<span class="str">"port"</span>])
+            payload = <span class="str">f"RUN {job_id} {len(code)}\n{code}"</span>
+            client.send(payload)
+            workers[wid][<span class="str">"status"</span>] = <span class="str">"busy"</span>
+            jobs[job_id][<span class="str">"status"</span>] = <span class="str">"RUNNING"</span>
+            jobs[job_id][<span class="str">"worker"</span>] = wid
+            <span class="kw">return</span> wid
+    <span class="kw">return</span> <span class="num">None</span>
+
+<span class="kw">def</span> <span class="fn">scheduler_loop</span>():
+    <span class="cm">"""Continuously try to assign queued jobs."""</span>
+    <span class="kw">while</span> <span class="num">True</span>:
+        time.sleep(<span class="num">1</span>)
+        <span class="kw">if not</span> job_queue:
+            <span class="kw">continue</span>
+        job_id = job_queue[<span class="num">0</span>]
+        code = jobs[job_id][<span class="str">"code"</span>]
+        assigned = assign_job(job_id, code)
+        <span class="kw">if</span> assigned:
+            job_queue.pop(<span class="num">0</span>)</code></pre>
+        </div>
+        <div class="code-panel" id="panel-heartbeat">
+          <div class="code-panel-header">
+            <span class="code-filename">master/master.py — Failure Detection</span>
+            <span class="code-lang">Python</span>
+          </div>
+          <pre><code>HEARTBEAT_TIMEOUT = <span class="num">15</span>  <span class="cm"># seconds</span>
+
+<span class="kw">def</span> <span class="fn">worker_monitor</span>():
+    <span class="cm">"""Detect dead workers and requeue their jobs."""</span>
+    <span class="kw">while</span> <span class="num">True</span>:
+        time.sleep(<span class="num">5</span>)
+        now = time.time()
+
+        <span class="kw">for</span> wid, w <span class="kw">in</span> workers.items():
+            <span class="kw">if</span> w[<span class="str">"last_heartbeat"</span>] == <span class="num">0</span>:
+                <span class="kw">continue</span>
+
+            <span class="cm"># Worker timed out → mark dead</span>
+            <span class="kw">if</span> now - w[<span class="str">"last_heartbeat"</span>] > HEARTBEAT_TIMEOUT:
+                <span class="kw">if</span> w[<span class="str">"status"</span>] != <span class="str">"dead"</span>:
+                    w[<span class="str">"status"</span>] = <span class="str">"dead"</span>
+
+                    <span class="cm"># Requeue any job the dead worker had</span>
+                    <span class="kw">for</span> job_id, job <span class="kw">in</span> jobs.items():
+                        <span class="kw">if</span> job[<span class="str">"worker"</span>] == wid \
+                           <span class="kw">and</span> job[<span class="str">"status"</span>] == <span class="str">"RUNNING"</span>:
+                            job[<span class="str">"status"</span>] = <span class="str">"QUEUED"</span>
+                            job[<span class="str">"worker"</span>] = <span class="num">None</span>
+                            job_queue.append(job_id)</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROTOCOL ========== -->
+  <section id="protocol-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Communication</span>
+        <h2>TCP Protocol</h2>
+        <p class="section-desc">The plain-text wire protocol used between all components.</p>
+      </div>
+      <div class="protocol-grid">
+        <div class="protocol-card" id="proto-submit">
+          <div class="protocol-direction">Client → Master</div>
+          <h3>SUBMIT</h3>
+          <pre><code>SUBMIT &lt;job_id&gt; &lt;code_length&gt;
+&lt;python source code&gt;</code></pre>
+        </div>
+        <div class="protocol-card" id="proto-run">
+          <div class="protocol-direction">Master → Worker</div>
+          <h3>RUN</h3>
+          <pre><code>RUN &lt;job_id&gt; &lt;code_length&gt;
+&lt;python source code&gt;</code></pre>
+        </div>
+        <div class="protocol-card" id="proto-done">
+          <div class="protocol-direction">Worker → Master</div>
+          <h3>DONE</h3>
+          <pre><code>DONE &lt;job_id&gt; &lt;output_length&gt;
+&lt;program output&gt;</code></pre>
+        </div>
+        <div class="protocol-card" id="proto-heartbeat">
+          <div class="protocol-direction">Worker → Master</div>
+          <h3>HEARTBEAT</h3>
+          <pre><code>HEARTBEAT &lt;worker_id&gt;</code></pre>
+        </div>
+        <div class="protocol-card" id="proto-status">
+          <div class="protocol-direction">Client → Master</div>
+          <h3>STATUS</h3>
+          <pre><code>STATUS &lt;job_id&gt;</code></pre>
+        </div>
+        <div class="protocol-card" id="proto-logs">
+          <div class="protocol-direction">Client → Master</div>
+          <h3>LOGS</h3>
+          <pre><code>LOGS &lt;job_id&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TECH STACK ========== -->
+  <section id="tech">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Built With</span>
+        <h2>Tech Stack</h2>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card" id="tech-python">
+          <div class="tech-icon">🐍</div>
+          <h3>Python 3</h3>
+          <p>Core language for master, workers, protocol, and shell</p>
+        </div>
+        <div class="tech-card" id="tech-sockets">
+          <div class="tech-icon">🔌</div>
+          <h3>TCP Sockets</h3>
+          <p>Raw socket programming for inter-process communication</p>
+        </div>
+        <div class="tech-card" id="tech-threads">
+          <div class="tech-icon">🧵</div>
+          <h3>Threads</h3>
+          <p>Concurrent client handling, heartbeat loops, and scheduling</p>
+        </div>
+        <div class="tech-card" id="tech-docker">
+          <div class="tech-icon">🐳</div>
+          <h3>Docker</h3>
+          <p>Sandboxed job execution inside isolated containers</p>
+        </div>
+        <div class="tech-card" id="tech-bash">
+          <div class="tech-icon">💻</div>
+          <h3>Bash</h3>
+          <p>Demo scripts for quick local demonstrations</p>
+        </div>
+        <div class="tech-card" id="tech-k8s">
+          <div class="tech-icon">☸️</div>
+          <h3>Kubernetes</h3>
+          <p>Deployment manifests for container orchestration (future)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LEARNINGS ========== -->
+  <section id="learnings">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Takeaways</span>
+        <h2>What I Learned</h2>
+      </div>
+      <div class="learnings-list">
+        <div class="learning-item" id="learning-1">
+          <div class="learning-number">01</div>
+          <div class="learning-content">
+            <h3>Master/Worker Architecture</h3>
+            <p>How to structure a central coordinator that manages worker state, routes tasks, and handles concurrent TCP connections using threads.</p>
+          </div>
+        </div>
+        <div class="learning-item" id="learning-2">
+          <div class="learning-number">02</div>
+          <div class="learning-content">
+            <h3>Heartbeat-Based Failure Detection</h3>
+            <p>How periodic health signals enable a coordinator to detect silent failures and trigger recovery actions within a configurable timeout window.</p>
+          </div>
+        </div>
+        <div class="learning-item" id="learning-3">
+          <div class="learning-number">03</div>
+          <div class="learning-content">
+            <h3>Job Scheduling Under Constraints</h3>
+            <p>How scheduling decisions change when workers can be idle, busy, or dead — and why a simple FIFO queue is a reasonable starting point.</p>
+          </div>
+        </div>
+        <div class="learning-item" id="learning-4">
+          <div class="learning-number">04</div>
+          <div class="learning-content">
+            <h3>Remote Execution & Result Collection</h3>
+            <p>How to safely execute code on remote nodes, capture output, and surface results through a client interface.</p>
+          </div>
+        </div>
+        <div class="learning-item" id="learning-5">
+          <div class="learning-number">05</div>
+          <div class="learning-content">
+            <h3>Why Production Systems Need More</h3>
+            <p>Why real distributed systems require stronger protocols, persistent storage, retries, idempotency, and observability beyond what this project covers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOLDER STRUCTURE ========== -->
+  <section id="structure">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">Repository</span>
+        <h2>Project Structure</h2>
+      </div>
+      <div class="tree-container" id="file-tree">
+        <pre class="tree-content"><span class="tree-dir">dce/</span>
+├── <span class="tree-dir">master/</span>
+│   ├── master.py          <span class="tree-comment"># Master node, message handler, threads</span>
+│   ├── scheduler.py       <span class="tree-comment"># (module placeholder)</span>
+│   └── state.py           <span class="tree-comment"># (module placeholder)</span>
+├── <span class="tree-dir">worker/</span>
+│   ├── worker.py          <span class="tree-comment"># Base worker (fake execution)</span>
+│   ├── worker1.py         <span class="tree-comment"># Docker-backed worker on port 9101</span>
+│   ├── worker2.py         <span class="tree-comment"># Docker-backed worker on port 9102</span>
+│   └── worker3.py         <span class="tree-comment"># Docker-backed worker on port 9103</span>
+├── <span class="tree-dir">protocol/</span>
+│   ├── tcp_server.py      <span class="tree-comment"># Threaded TCP server</span>
+│   ├── tcp_client.py      <span class="tree-comment"># TCP client for sending messages</span>
+│   └── protocol.py        <span class="tree-comment"># (module placeholder)</span>
+├── <span class="tree-dir">shell/</span>
+│   ├── dcesh.py           <span class="tree-comment"># Interactive command-line shell</span>
+│   └── parser.py          <span class="tree-comment"># Command parser</span>
+├── <span class="tree-dir">docker/</span>
+│   ├── Dockerfile.master  <span class="tree-comment"># Container for master node</span>
+│   ├── Dockerfile.worker  <span class="tree-comment"># Container for worker nodes</span>
+│   └── Dockerfile.job     <span class="tree-comment"># Container for job execution</span>
+├── <span class="tree-dir">examples/</span>
+│   └── distributed_sum.py <span class="tree-comment"># Sample workload</span>
+├── <span class="tree-dir">docs/</span>
+│   ├── architecture.md
+│   ├── protocol.md
+│   └── portfolio-copy.md
+├── <span class="tree-dir">k8s/</span>                    <span class="tree-comment"># Kubernetes manifests (future)</span>
+├── demo.sh                <span class="tree-comment"># Local demo launcher</span>
+└── README.md</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">⬡</span>
+        <span>Distributed Compute Engine</span>
+      </div>
+      <p class="footer-copy">
+        A systems programming portfolio project.
+        <a href="https://github.com/Sourya-Prabaharan/dce" target="_blank">View on GitHub →</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="simulation.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
