@@ -65,7 +65,7 @@ The master listens on port `9000`. Workers listen on ports `9101`, `9102`, and `
 - Heartbeat-based worker health tracking
 - Requeueing for jobs assigned to workers that stop heartbeating
 - Simple shell client for submitting jobs and reading logs
-- Demo script and sample workload for screenshots
+- Demo script and sample workload
 
 ## Tech Stack
 
@@ -132,27 +132,17 @@ status job1
 logs job1
 ```
 
-## Screenshots
+## Browser preview
 
-Suggested screenshots are listed in [docs/screenshots.md](docs/screenshots.md).
+The [static website](website/index.html) simulates scheduling and worker events in JavaScript. It does not submit jobs to the Python master. Preview it with `python3 -m http.server 8088 --directory website` and open http://localhost:8088.
 
-Place final images in a future `docs/screenshots/` folder:
+## Checks
 
-- master starting
-- three workers connecting
-- jobs being assigned
-- failed worker detection
-- final result aggregation
-
-## Demo GIF / Video
-
-Placeholder: add a short GIF or screen recording showing the master, three workers, and one submitted job completing.
-
-Suggested path:
-
-```text
-docs/demo/dce-demo.gif
+```bash
+python3 -m unittest discover -s tests -v
 ```
+
+These tests cover queued submissions, connection failure, and completion arriving before the worker's synchronous reply. Docker execution is a separate integration check; Docker must be installed and running for the numbered workers. See [captured state-transition output](docs/test-output.txt).
 
 ## Folder Structure
 
@@ -162,7 +152,7 @@ worker/       Worker processes and Docker-based job execution
 protocol/     TCP client/server helpers
 shell/        Simple interactive command shell
 docker/       Dockerfiles for local/container experiments
-docs/         Architecture, demo, screenshot, and portfolio notes
+docs/         Architecture, demo, and project scope notes
 examples/     Sample workloads for demos
 ```
 
@@ -172,7 +162,11 @@ examples/     Sample workloads for demos
 - Jobs are assigned as whole Python scripts; one submitted job is not split into smaller chunks yet.
 - Job execution currently depends on Docker in the numbered worker scripts.
 - The protocol is plain text and intended for learning/debugging.
-- There is no authentication, persistent storage, or web dashboard.
+- There is no authentication or persistent storage. Run only in a trusted local environment.
+- State is shared across threads without comprehensive locking; this is not a concurrency-safe production scheduler.
+- Heartbeat timeout requeues whole jobs; it does not checkpoint work or provide exactly-once execution.
+- Kubernetes deployment manifests are not included.
+- The website is a simulation, not a backend-connected dashboard.
 
 ## What I Learned
 
@@ -191,15 +185,8 @@ examples/     Sample workloads for demos
 - Replace the plain-text protocol with structured messages
 - Add automated integration tests for master/worker behavior
 
-## Resume Bullet Examples
+## More documentation
 
-- Built a Python-based distributed compute engine with a TCP master/worker architecture, job queueing, worker heartbeats, and result collection.
-- Implemented basic fault detection by monitoring worker heartbeats and requeueing jobs when a worker stopped responding.
-- Created a Docker-backed worker execution flow and command-line shell for submitting jobs, checking status, and viewing logs.
-
-## More Documentation
-
-- [Architecture Notes](docs/architecture.md)
-- [Demo Guide](docs/demo.md)
-- [Screenshot Checklist](docs/screenshots.md)
-- [Portfolio Copy](docs/portfolio-copy.md)
+- [Architecture notes](docs/architecture.md)
+- [Local demo guide](docs/demo.md)
+- [Project scope](docs/portfolio-copy.md)

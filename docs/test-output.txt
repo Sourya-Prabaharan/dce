@@ -1,0 +1,32 @@
+test_completion_during_send_is_not_overwritten (test_master.MasterTests.test_completion_during_send_is_not_overwritten) ... ok
+test_completion_survives_lost_reply (test_master.MasterTests.test_completion_survives_lost_reply) ... ok
+test_submission_without_workers_is_queued (test_master.MasterTests.test_submission_without_workers_is_queued) ... ok
+test_unreachable_worker_requeues_submission (test_master.MasterTests.test_unreachable_worker_requeues_submission) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+[MASTER] worker1 connected from 127.0.0.1:9101
+[HEARTBEAT] worker1 alive
+[MASTER] Job job1 received (8 bytes)
+[SCHEDULER] Assigned task job1 to worker1
+[RESULT] worker1 completed task job1
+1
+
+[FINAL] Distributed job job1 completed in 0 ms
+[MASTER] worker1 connected from 127.0.0.1:9101
+[HEARTBEAT] worker1 alive
+[MASTER] Job job1 received (8 bytes)
+[SCHEDULER] Assigned task job1 to worker1
+[RESULT] worker1 completed task job1
+1
+
+[FINAL] Distributed job job1 completed in 0 ms
+[MASTER] Worker worker1 unreachable - marking dead
+[MASTER] Job job1 received (8 bytes)
+[MASTER] worker1 connected from 127.0.0.1:9101
+[HEARTBEAT] worker1 alive
+[MASTER] Job job1 received (8 bytes)
+[SCHEDULER] Assigned task job1 to worker1
+[MASTER] Worker worker1 unreachable - marking dead

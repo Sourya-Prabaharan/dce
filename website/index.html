@@ -21,7 +21,7 @@
       <div class="nav-links">
         <a href="#features" class="nav-link">Features</a>
         <a href="#architecture" class="nav-link">Architecture</a>
-        <a href="#simulation" class="nav-link">Live Demo</a>
+        <a href="#simulation" class="nav-link">Browser Simulation</a>
         <a href="#code" class="nav-link">Code</a>
         <a href="#tech" class="nav-link">Stack</a>
         <a href="https://github.com/Sourya-Prabaharan/dce" target="_blank" class="nav-link nav-github">
@@ -229,6 +229,7 @@
 
   <!-- ========== INTERACTIVE SIMULATION ========== -->
   <section id="simulation">
+    <p style="text-align:center">JavaScript simulation only. No Python master, Docker worker, or Kubernetes cluster runs in this page.</p>
     <div class="section-container">
       <div class="section-header">
         <span class="section-tag">Interactive</span>
@@ -613,8 +614,8 @@ job_queue = []  <span class="cm"># FIFO order of waiting jobs</span>
         </div>
         <div class="tech-card" id="tech-k8s">
           <div class="tech-icon">☸️</div>
-          <h3>Kubernetes</h3>
-          <p>Deployment manifests for container orchestration (future)</p>
+          <h3>Deployment scope</h3>
+          <p>Local Docker workers; Kubernetes manifests are not included</p>
         </div>
       </div>
     </div>
@@ -678,8 +679,6 @@ job_queue = []  <span class="cm"># FIFO order of waiting jobs</span>
         <pre class="tree-content"><span class="tree-dir">dce/</span>
 ├── <span class="tree-dir">master/</span>
 │   ├── master.py          <span class="tree-comment"># Master node, message handler, threads</span>
-│   ├── scheduler.py       <span class="tree-comment"># (module placeholder)</span>
-│   └── state.py           <span class="tree-comment"># (module placeholder)</span>
 ├── <span class="tree-dir">worker/</span>
 │   ├── worker.py          <span class="tree-comment"># Base worker (fake execution)</span>
 │   ├── worker1.py         <span class="tree-comment"># Docker-backed worker on port 9101</span>
@@ -688,7 +687,6 @@ job_queue = []  <span class="cm"># FIFO order of waiting jobs</span>
 ├── <span class="tree-dir">protocol/</span>
 │   ├── tcp_server.py      <span class="tree-comment"># Threaded TCP server</span>
 │   ├── tcp_client.py      <span class="tree-comment"># TCP client for sending messages</span>
-│   └── protocol.py        <span class="tree-comment"># (module placeholder)</span>
 ├── <span class="tree-dir">shell/</span>
 │   ├── dcesh.py           <span class="tree-comment"># Interactive command-line shell</span>
 │   └── parser.py          <span class="tree-comment"># Command parser</span>
@@ -702,7 +700,6 @@ job_queue = []  <span class="cm"># FIFO order of waiting jobs</span>
 │   ├── architecture.md
 │   ├── protocol.md
 │   └── portfolio-copy.md
-├── <span class="tree-dir">k8s/</span>                    <span class="tree-comment"># Kubernetes manifests (future)</span>
 ├── demo.sh                <span class="tree-comment"># Local demo launcher</span>
 └── README.md</pre>
       </div>
