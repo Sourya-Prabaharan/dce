@@ -1,6 +1,6 @@
 # Demo Guide
 
-Use this guide to record a short project demo or capture screenshots for GitHub and LinkedIn.
+Use this guide to run the Python master and Docker-backed workers locally.
 
 ## 1. Start The Demo Helper
 
@@ -44,7 +44,7 @@ Expected log examples:
 [MASTER] Job demo1 received
 [SCHEDULER] Assigned task demo1 to worker1
 [RESULT] worker1 completed task demo1
-[FINAL] Distributed job demo1 completed in 1200 ms
+[FINAL] Distributed job demo1 completed in <elapsed> ms
 ```
 
 ## 4. Show Failure Detection

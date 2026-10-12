@@ -30,6 +30,12 @@ def assign_job(job_id, code):
 
             print(f"[SCHEDULER] Assigned task {job_id} to {wid}")
 
+            # send waits for the worker, which reports DONE before replying.
+            workers[wid]["status"] = "busy"
+            jobs[job_id]["status"] = "RUNNING"
+            jobs[job_id]["worker"] = wid
+            jobs[job_id]["started_at"] = time.time()
+
             try:
                 client = TCPClient(w["host"], w["port"])
                 payload = f"RUN {job_id} {len(code)}\n{code}"
@@ -37,12 +43,11 @@ def assign_job(job_id, code):
             except:
                 print(f"[MASTER] Worker {wid} unreachable - marking dead")
                 w["status"] = "dead"
+                if jobs[job_id]["status"] == "DONE":
+                    return wid  # Completion arrived before the connection failed.
+                jobs[job_id].update(status="QUEUED", worker=None, started_at=None)
                 continue
 
-            workers[wid]["status"] = "busy"
-            jobs[job_id]["status"] = "RUNNING"
-            jobs[job_id]["worker"] = wid
-            jobs[job_id]["started_at"] = time.time()
             return wid
 
     return None
