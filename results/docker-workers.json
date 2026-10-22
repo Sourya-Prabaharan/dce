@@ -1,0 +1,41 @@
+[
+  {
+    "alive": true,
+    "assigned_tasks": 0,
+    "available_slot_seconds": 1.040782209,
+    "capacity": 1,
+    "heartbeat_age_ms": 32.517333,
+    "id": "worker-3",
+    "idle_slot_seconds": 1.040782209,
+    "load": 0,
+    "occupied_slot_seconds": 0.0,
+    "session": "1754814131-2409380985-3930033669-3351123309-3",
+    "utilization": 0.0
+  },
+  {
+    "alive": true,
+    "assigned_tasks": 0,
+    "available_slot_seconds": 1.037732209,
+    "capacity": 1,
+    "heartbeat_age_ms": 34.531833,
+    "id": "worker-1",
+    "idle_slot_seconds": 1.037732209,
+    "load": 0,
+    "occupied_slot_seconds": 0.0,
+    "session": "1754814131-2409380985-3930033669-3351123309-4",
+    "utilization": 0.0
+  },
+  {
+    "alive": true,
+    "assigned_tasks": 0,
+    "available_slot_seconds": 1.007548292,
+    "capacity": 1,
+    "heartbeat_age_ms": 4.863125,
+    "id": "worker-2",
+    "idle_slot_seconds": 1.007548292,
+    "load": 0,
+    "occupied_slot_seconds": 0.0,
+    "session": "1754814131-2409380985-3930033669-3351123309-6",
+    "utilization": 0.0
+  }
+]

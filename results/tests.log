@@ -1,0 +1,9 @@
+Test project /Users/sourya/dce/build
+    Start 1: unit
+1/2 Test #1: unit .............................   Passed    0.34 sec
+    Start 2: integration
+2/2 Test #2: integration ......................   Passed    6.39 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   6.74 sec

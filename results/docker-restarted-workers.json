@@ -1,0 +1,54 @@
+[
+  {
+    "alive": true,
+    "assigned_tasks": 10,
+    "available_slot_seconds": 39.874203435999995,
+    "capacity": 1,
+    "heartbeat_age_ms": 495.6375,
+    "id": "worker-3",
+    "idle_slot_seconds": 38.31973235299999,
+    "load": 0,
+    "occupied_slot_seconds": 1.5544710830000001,
+    "session": "1754814131-2409380985-3930033669-3351123309-3",
+    "utilization": 0.038984379600084065
+  },
+  {
+    "alive": false,
+    "assigned_tasks": 9,
+    "available_slot_seconds": 37.737805767999994,
+    "capacity": 1,
+    "heartbeat_age_ms": 2565.978043,
+    "id": "worker-1",
+    "idle_slot_seconds": 36.684400141,
+    "load": 0,
+    "occupied_slot_seconds": 1.053405627,
+    "session": "1754814131-2409380985-3930033669-3351123309-4",
+    "utilization": 0.027913801705271427
+  },
+  {
+    "alive": true,
+    "assigned_tasks": 9,
+    "available_slot_seconds": 39.840969519000005,
+    "capacity": 1,
+    "heartbeat_age_ms": 495.648667,
+    "id": "worker-2",
+    "idle_slot_seconds": 38.42762909900001,
+    "load": 0,
+    "occupied_slot_seconds": 1.41334042,
+    "session": "1754814131-2409380985-3930033669-3351123309-6",
+    "utilization": 0.0354745488642284
+  },
+  {
+    "alive": true,
+    "assigned_tasks": 0,
+    "available_slot_seconds": 0.075017042,
+    "capacity": 1,
+    "heartbeat_age_ms": 74.347792,
+    "id": "worker-1",
+    "idle_slot_seconds": 0.075017042,
+    "load": 0,
+    "occupied_slot_seconds": 0.0,
+    "session": "1754814131-2409380985-3930033669-3351123309-66",
+    "utilization": 0.0
+  }
+]

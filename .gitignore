@@ -1,9 +1,5 @@
-__pycache__/
-*.py[cod]
+/build*/
+/deps/
+/run/
+/data/*.csv
 .DS_Store
-docs/screenshots/
-docs/demo/*.gif
-docs/demo/*.mp4
-.vercel
-.env*
-

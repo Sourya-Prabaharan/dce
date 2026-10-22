@@ -1,0 +1,6 @@
+build*
+deps
+run
+.git
+results
+data/*.csv

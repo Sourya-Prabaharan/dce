@@ -1,0 +1,4 @@
+Test project /Users/sourya/dce/build-sanitize
+    Start 1: unit
+
+Sanitizer run stopped: Apple ASan runtime deadlocked during dyld initialization before main(). See sanitizer-startup-sample.txt. No sanitizer test is claimed as passing.

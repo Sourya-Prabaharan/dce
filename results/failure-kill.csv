@@ -1,0 +1,6 @@
+trial,mode,reassignment_ms,recovered,within_5s
+1,SIGKILL,376.865,1,1
+2,SIGKILL,381.787,1,1
+3,SIGKILL,402.66,1,1
+4,SIGKILL,348.263,1,1
+5,SIGKILL,363.007,1,1

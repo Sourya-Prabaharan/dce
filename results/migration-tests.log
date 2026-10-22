@@ -1,0 +1,209 @@
+Start testing: Oct 22 14:44 CDT
+----------------------------------------------------------
+1/2 Testing: unit
+1/2 Test: unit
+Command: "/Users/sourya/dce/build-migration/dce-tests"
+Directory: /Users/sourya/dce/build-migration
+"unit" start time: Oct 22 14:44 CDT
+Output:
+----------------------------------------------------------
+{"elapsed_ms":0.0,"event":"registered","session":"2580687170-1702897512-3745888854-262315236-2","type":"registered","unix_ms":1792698296112,"worker":"one"}
+{"elapsed_ms":0.0,"event":"registered","session":"2580687170-1702897512-3745888854-262315236-3","type":"registered","unix_ms":1792698296113,"worker":"three"}
+{"elapsed_ms":0.0,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-4","type":"submitted","unix_ms":1792698296113}
+{"attempt":"2580687170-1702897512-3745888854-262315236-17","elapsed_ms":0.0,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-4","session":"2580687170-1702897512-3745888854-262315236-2","task":"2580687170-1702897512-3745888854-262315236-5","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"one"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-18","elapsed_ms":0.0,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-4","session":"2580687170-1702897512-3745888854-262315236-3","task":"2580687170-1702897512-3745888854-262315236-6","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"three"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-19","elapsed_ms":0.0,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-4","session":"2580687170-1702897512-3745888854-262315236-3","task":"2580687170-1702897512-3745888854-262315236-7","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"three"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-20","elapsed_ms":0.0,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-4","session":"2580687170-1702897512-3745888854-262315236-3","task":"2580687170-1702897512-3745888854-262315236-8","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"three"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-17","elapsed_ms":0.0,"event":"completed_task","task":"2580687170-1702897512-3745888854-262315236-5","type":"completed_task","unix_ms":1792698296113,"worker":"one"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-18","elapsed_ms":0.0,"event":"completed_task","task":"2580687170-1702897512-3745888854-262315236-6","type":"completed_task","unix_ms":1792698296113,"worker":"three"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-19","elapsed_ms":0.0,"event":"completed_task","task":"2580687170-1702897512-3745888854-262315236-7","type":"completed_task","unix_ms":1792698296113,"worker":"three"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-20","elapsed_ms":0.0,"event":"completed_task","task":"2580687170-1702897512-3745888854-262315236-8","type":"completed_task","unix_ms":1792698296113,"worker":"three"}
+{"elapsed_ms":0.0,"event":"stale_result","task":"2580687170-1702897512-3745888854-262315236-5","type":"stale_result","unix_ms":1792698296113}
+{"attempt":"2580687170-1702897512-3745888854-262315236-21","elapsed_ms":0.0,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-4","session":"2580687170-1702897512-3745888854-262315236-2","task":"2580687170-1702897512-3745888854-262315236-9","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"one"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-22","elapsed_ms":0.0,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-4","session":"2580687170-1702897512-3745888854-262315236-3","task":"2580687170-1702897512-3745888854-262315236-10","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"three"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-23","elapsed_ms":0.0,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-4","session":"2580687170-1702897512-3745888854-262315236-3","task":"2580687170-1702897512-3745888854-262315236-11","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"three"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-24","elapsed_ms":0.0,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-4","session":"2580687170-1702897512-3745888854-262315236-3","task":"2580687170-1702897512-3745888854-262315236-12","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"three"}
+{"elapsed_ms":-0.197042,"event":"registered","session":"2580687170-1702897512-3745888854-262315236-25","type":"registered","unix_ms":1792698296113,"worker":"restart"}
+{"elapsed_ms":-0.197042,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-26","type":"submitted","unix_ms":1792698296113}
+{"attempt":"2580687170-1702897512-3745888854-262315236-28","elapsed_ms":-0.197042,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-26","session":"2580687170-1702897512-3745888854-262315236-25","task":"2580687170-1702897512-3745888854-262315236-27","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"restart"}
+{"elapsed_ms":2099.802958,"event":"worker_lost","reason":"heartbeat_timeout","session":"2580687170-1702897512-3745888854-262315236-25","type":"worker_lost","unix_ms":1792698296113,"worker":"restart"}
+{"elapsed_ms":2099.802958,"event":"requeued","reason":"heartbeat_timeout","task":"2580687170-1702897512-3745888854-262315236-27","type":"requeued","unix_ms":1792698296113}
+{"elapsed_ms":2199.8029579999998,"event":"registered","session":"2580687170-1702897512-3745888854-262315236-29","type":"registered","unix_ms":1792698296113,"worker":"restart"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-30","elapsed_ms":2199.8029579999998,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-26","session":"2580687170-1702897512-3745888854-262315236-29","task":"2580687170-1702897512-3745888854-262315236-27","try":2,"type":"assigned","unix_ms":1792698296113,"worker":"restart"}
+{"elapsed_ms":0.048041,"event":"stale_result","task":"2580687170-1702897512-3745888854-262315236-27","type":"stale_result","unix_ms":1792698296113}
+{"attempt":"2580687170-1702897512-3745888854-262315236-30","elapsed_ms":0.05275,"event":"completed_task","task":"2580687170-1702897512-3745888854-262315236-27","type":"completed_task","unix_ms":1792698296113,"worker":"restart"}
+{"elapsed_ms":0.05275,"event":"completed_job","job":"2580687170-1702897512-3745888854-262315236-26","type":"completed_job","unix_ms":1792698296113}
+{"elapsed_ms":0.0,"event":"registered","session":"2580687170-1702897512-3745888854-262315236-31","type":"registered","unix_ms":1792698296113,"worker":"bad"}
+{"elapsed_ms":0.005417,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-32","type":"submitted","unix_ms":1792698296113}
+{"attempt":"2580687170-1702897512-3745888854-262315236-34","elapsed_ms":0.024042,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-32","session":"2580687170-1702897512-3745888854-262315236-31","task":"2580687170-1702897512-3745888854-262315236-33","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"bad"}
+{"elapsed_ms":0.033834,"event":"requeued","reason":"bad input","task":"2580687170-1702897512-3745888854-262315236-33","type":"requeued","unix_ms":1792698296113}
+{"attempt":"2580687170-1702897512-3745888854-262315236-35","elapsed_ms":0.038792,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-32","session":"2580687170-1702897512-3745888854-262315236-31","task":"2580687170-1702897512-3745888854-262315236-33","try":2,"type":"assigned","unix_ms":1792698296113,"worker":"bad"}
+{"elapsed_ms":0.049583999999999996,"error":"bad input","event":"task_failed","job":"2580687170-1702897512-3745888854-262315236-32","task":"2580687170-1702897512-3745888854-262315236-33","type":"task_failed","unix_ms":1792698296113}
+{"elapsed_ms":-0.329542,"event":"registered","session":"2580687170-1702897512-3745888854-262315236-36","type":"registered","unix_ms":1792698296113,"worker":"silent"}
+{"elapsed_ms":-0.329542,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-37","type":"submitted","unix_ms":1792698296113}
+{"attempt":"2580687170-1702897512-3745888854-262315236-50","elapsed_ms":-0.329542,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-37","session":"2580687170-1702897512-3745888854-262315236-36","task":"2580687170-1702897512-3745888854-262315236-38","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"silent"}
+{"elapsed_ms":1099.670458,"event":"worker_lost","reason":"ack_timeout","session":"2580687170-1702897512-3745888854-262315236-36","type":"worker_lost","unix_ms":1792698296113,"worker":"silent"}
+{"elapsed_ms":1099.670458,"event":"requeued","reason":"ack_timeout","task":"2580687170-1702897512-3745888854-262315236-38","type":"requeued","unix_ms":1792698296113}
+{"elapsed_ms":-0.37066699999999997,"event":"registered","session":"2580687170-1702897512-3745888854-262315236-51","type":"registered","unix_ms":1792698296113,"worker":"stuck"}
+{"elapsed_ms":-0.37066699999999997,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-52","type":"submitted","unix_ms":1792698296113}
+{"attempt":"2580687170-1702897512-3745888854-262315236-65","elapsed_ms":-0.37066699999999997,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-52","session":"2580687170-1702897512-3745888854-262315236-51","task":"2580687170-1702897512-3745888854-262315236-53","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"stuck"}
+{"elapsed_ms":3099.6293330000003,"event":"worker_lost","reason":"execution_lease_expired","session":"2580687170-1702897512-3745888854-262315236-51","type":"worker_lost","unix_ms":1792698296113,"worker":"stuck"}
+{"elapsed_ms":3099.6293330000003,"event":"requeued","reason":"execution_lease_expired","task":"2580687170-1702897512-3745888854-262315236-53","type":"requeued","unix_ms":1792698296113}
+{"elapsed_ms":0.0,"event":"registered","session":"2580687170-1702897512-3745888854-262315236-66","type":"registered","unix_ms":1792698296113,"worker":"malformed"}
+{"elapsed_ms":0.005125,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-67","type":"submitted","unix_ms":1792698296113}
+{"attempt":"2580687170-1702897512-3745888854-262315236-80","elapsed_ms":0.022083,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-67","session":"2580687170-1702897512-3745888854-262315236-66","task":"2580687170-1702897512-3745888854-262315236-68","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"malformed"}
+{"elapsed_ms":0.045791000000000005,"event":"worker_lost","reason":"disconnect","session":"2580687170-1702897512-3745888854-262315236-66","type":"worker_lost","unix_ms":1792698296113,"worker":"malformed"}
+{"elapsed_ms":0.045791000000000005,"event":"requeued","reason":"disconnect","task":"2580687170-1702897512-3745888854-262315236-68","type":"requeued","unix_ms":1792698296113}
+{"elapsed_ms":0.053083,"event":"registered","session":"2580687170-1702897512-3745888854-262315236-81","type":"registered","unix_ms":1792698296113,"worker":"healthy"}
+{"attempt":"2580687170-1702897512-3745888854-262315236-82","elapsed_ms":0.056291,"event":"assigned","job":"2580687170-1702897512-3745888854-262315236-67","session":"2580687170-1702897512-3745888854-262315236-81","task":"2580687170-1702897512-3745888854-262315236-69","try":1,"type":"assigned","unix_ms":1792698296113,"worker":"healthy"}
+{"elapsed_ms":0.017042,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-83","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.056625,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-96","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.111459,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-109","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.081375,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-122","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.024791999999999998,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-135","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.038,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-148","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.20483400000000002,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-161","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.057791999999999996,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-174","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.236792,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-187","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.253417,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-200","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.16699999999999998,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-213","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.187917,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-226","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.30174999999999996,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-239","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.316042,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-252","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.123042,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-265","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.050624999999999996,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-278","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.362584,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-291","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.282959,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-304","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.115375,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-317","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.221417,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-330","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.33125,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-343","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.440667,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-356","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.270292,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-369","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.4695,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-382","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.4845,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-395","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.501417,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-408","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.514167,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-421","type":"submitted","unix_ms":1792698296113}
+{"elapsed_ms":0.34079200000000004,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-434","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.45466700000000004,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-447","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.376542,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-460","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.577209,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-473","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.5918749999999999,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-486","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.604417,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-499","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.6185,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-512","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.541084,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-525","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.64875,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-538","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.390834,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-551","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.677042,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-564","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.425542,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-577","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.707292,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-590","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.721792,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-603","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.5573750000000001,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-616","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.748209,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-629","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.409209,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-642","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.780542,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-655","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.7952089999999999,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-668","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.6327499999999999,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-681","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.737417,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-694","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.8392090000000001,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-707","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.856,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-720","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.873709,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-733","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.887125,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-746","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.900417,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-759","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.914542,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-772","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.6625840000000001,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-785","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.943542,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-798","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.957959,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-811","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.528625,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-824","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.984292,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-837","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.8218340000000001,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-850","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.0131249999999998,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-863","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.0271670000000002,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-876","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.04075,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-889","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.0567499999999999,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-902","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.070542,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-915","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.1002500000000002,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-928","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.929959,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-941","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.763792,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-954","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.140375,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-967","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.154167,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-980","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.169042,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-993","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.0847090000000001,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1006","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.000084,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1019","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.214917,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1032","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.691,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1045","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.243334,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1058","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.809542,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1071","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.181459,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1084","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.2890840000000001,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1097","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.303625,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1110","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.318167,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1123","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":0.972792,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1136","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.3645420000000001,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1149","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.271167,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1162","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.384292,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1175","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.4013339999999999,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1188","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.121584,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1201","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.333084,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1214","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.348792,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1227","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.451667,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1240","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.1995,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1253","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.2297090000000002,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1266","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.428375,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1279","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.258667,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1292","type":"submitted","unix_ms":1792698296114}
+{"elapsed_ms":1.4663339999999998,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1305","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.4810839999999998,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1318","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.5086249999999999,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1331","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.569042,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1344","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.584709,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1357","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.598792,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1370","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.612792,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1383","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.537084,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1396","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.640625,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1409","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.6257089999999998,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1422","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.553292,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1435","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.654834,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1448","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.698625,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1461","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.717042,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1474","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.73075,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1487","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.666917,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1500","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.7449169999999998,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1513","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.776792,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1526","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.7916670000000001,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1539","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.8047499999999999,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1552","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.7619999999999998,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1565","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.8175839999999999,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1578","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.847,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1591","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.8621670000000001,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1604","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.892042,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1617","type":"submitted","unix_ms":1792698296115}
+{"elapsed_ms":1.911125,"event":"submitted","job":"2580687170-1702897512-3745888854-262315236-1630","type":"submitted","unix_ms":1792698296115}
+{"error":"[json.exception.parse_error.101] parse error at line 1, column 2: syntax error while parsing object key - unexpected end of input; expected string literal","event":"protocol_error","unix_ms":1792698296122}
+{"error":"object required","event":"protocol_error","unix_ms":1792698296122}
+PASS: framing, aggregation, validation, capacity, load selection, concurrent queue, heartbeat, ACK timeout, reconnect sessions, stale/duplicate acceptance, retry exhaustion
+<end of output>
+Test time =   0.70 sec
+----------------------------------------------------------
+Test Passed.
+"unit" end time: Oct 22 14:44 CDT
+"unit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/2 Testing: integration
+2/2 Test: integration
+Command: "/Users/sourya/dce/build-migration/dce-verify" "/Users/sourya/dce/build-migration" "/Users/sourya/dce"
+Directory: /Users/sourya/dce/build-migration
+"integration" start time: Oct 22 14:44 CDT
+Output:
+----------------------------------------------------------
+PASS: 120 jobs completed with known correct results
+trial 1 SIGKILL reassigned in 340.193 ms; correct result
+trial 1 SIGSTOP reassigned in 2087.03 ms; correct result
+PASS: real three-worker execution, serial comparison, API, failure recovery, heartbeat detection and reconnection; logs /Users/sourya/dce/run/verify-11899
+<end of output>
+Test time =   5.87 sec
+----------------------------------------------------------
+Test Passed.
+"integration" end time: Oct 22 14:45 CDT
+"integration" time elapsed: 00:00:05
+----------------------------------------------------------
+
+End testing: Oct 22 14:45 CDT

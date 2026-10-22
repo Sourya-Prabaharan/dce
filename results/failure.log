@@ -1,0 +1,8 @@
+trial 1 SIGKILL reassigned in 376.865 ms; correct result
+trial 2 SIGKILL reassigned in 381.787 ms; correct result
+trial 3 SIGKILL reassigned in 402.66 ms; correct result
+trial 4 SIGKILL reassigned in 348.263 ms; correct result
+trial 5 SIGKILL reassigned in 363.007 ms; correct result
+trial 1 SIGSTOP reassigned in 1995.87 ms; correct result
+trial 2 SIGSTOP reassigned in 2005.96 ms; correct result
+trial 3 SIGSTOP reassigned in 2062.73 ms; correct result

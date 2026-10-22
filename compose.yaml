@@ -1,0 +1,23 @@
+services:
+  coordinator:
+    build: .
+    ports: ["127.0.0.1:8080:8080", "127.0.0.1:9000:9000"]
+    volumes: ["./data:/data:ro"]
+    healthcheck:
+      test: ["CMD", "dce-cli", "health"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+  worker-1: &worker
+    build: .
+    command: ["dce-worker", "--host", "coordinator", "--id", "worker-1", "--threads", "${DCE_THREADS:-1}", "--data", "/data"]
+    volumes: ["./data:/data:ro"]
+    depends_on:
+      coordinator: {condition: service_healthy}
+    restart: on-failure
+  worker-2:
+    <<: *worker
+    command: ["dce-worker", "--host", "coordinator", "--id", "worker-2", "--threads", "${DCE_THREADS:-1}", "--data", "/data"]
+  worker-3:
+    <<: *worker
+    command: ["dce-worker", "--host", "coordinator", "--id", "worker-3", "--threads", "${DCE_THREADS:-1}", "--data", "/data"]

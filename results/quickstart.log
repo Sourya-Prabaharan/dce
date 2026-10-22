@@ -1,0 +1,46 @@
+deps/json.hpp: OK
+-- The CXX compiler identification is AppleClang 17.0.0.17000013
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (1.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/sourya/dce/build-quickstart
+[ 13%] Building CXX object CMakeFiles/dce.dir/src/scheduler.cpp.o
+[ 20%] Building CXX object CMakeFiles/dce.dir/src/protocol.cpp.o
+[ 20%] Building CXX object CMakeFiles/dce.dir/src/http.cpp.o
+[ 26%] Building CXX object CMakeFiles/dce.dir/src/compute.cpp.o
+[ 33%] Linking CXX static library libdce.a
+[ 33%] Built target dce
+[ 60%] Building CXX object CMakeFiles/dce-cli.dir/src/cli.cpp.o
+[ 60%] Building CXX object CMakeFiles/dce-tests.dir/tests/unit.cpp.o
+[ 60%] Building CXX object CMakeFiles/dce-worker.dir/src/worker.cpp.o
+[ 60%] Building CXX object CMakeFiles/dce-coordinator.dir/src/coordinator.cpp.o
+[ 73%] Linking CXX executable dce-cli
+[ 73%] Linking CXX executable dce-tests
+[ 80%] Linking CXX executable dce-worker
+[ 80%] Built target dce-cli
+[ 80%] Built target dce-worker
+[ 80%] Built target dce-tests
+[ 86%] Building CXX object CMakeFiles/dce-verify.dir/tests/integration.cpp.o
+[ 93%] Linking CXX executable dce-coordinator
+[ 93%] Built target dce-coordinator
+[100%] Linking CXX executable dce-verify
+[100%] Built target dce-verify
+Test project /Users/sourya/dce/build-quickstart
+    Start 1: unit
+1/2 Test #1: unit .............................   Passed    0.49 sec
+    Start 2: integration
+2/2 Test #2: integration ......................   Passed    6.35 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   6.85 sec
+{"file":"data/numbers.csv","rows":10000}
+trial 1 SIGKILL reassigned in 408.476 ms; correct result
+PASS: real three-worker execution, serial comparison, API, failure recovery; logs /Users/sourya/dce/./run/verify-71798
