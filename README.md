@@ -2,11 +2,15 @@
 
 A small, working coordinator/worker engine for explaining distributed scheduling and failure recovery in interviews. All engine components, the HTTP API, CLI, computational kernels, and test harnesses are C++20. Shell scripts only build or launch the C++ programs. The dashboard is plain HTML/CSS/JavaScript.
 
-The active implementation is C++20. The original Python implementation is preserved in Git history at `3340626`; see [migration notes](docs/migration.md). The static [project overview](https://sourya-prabaharan.github.io/dce/) describes the engine; the live dashboard runs on the coordinator at port 8080.
+The active implementation is C++20. The original implementation is preserved in Git history at `3340626`; see [migration notes](docs/migration.md). The static [project overview](https://sourya-prabaharan.github.io/dce/) describes the engine; the live dashboard runs on the coordinator at port 8080.
+
+## Demo
+
+[View the C++ execution demo](https://sourya-prabaharan.github.io/dce/demo.html): real recorded prime, CSV, and worker-failure results from the compiled C++ engine. This is a recorded viewer, not a hosted compute service. For live submissions, run the quickstart and open `http://127.0.0.1:8080`.
 
 ## Quickstart
 
-Requirements: Linux with GCC 12+ or Clang 16+, or macOS with a C++20 compiler; CMake 3.20+, POSIX threads, `curl`, and `tar` with bzip2 support. Ubuntu/Debian: `sudo apt-get install build-essential cmake curl ca-certificates bzip2`. No Python, Node, frontend build, or separately installed Boost is required.
+Requirements: Linux with GCC 12+ or Clang 16+, or macOS with a C++20 compiler; CMake 3.20+, POSIX threads, `curl`, and `tar` with bzip2 support. Ubuntu/Debian: `sudo apt-get install build-essential cmake curl ca-certificates bzip2`. No scripting-language runtime, frontend build, or separately installed Boost is required.
 
 Run from the repository root:
 
@@ -161,6 +165,14 @@ Measured October 5, 2026 on an **Apple M3, 8 logical CPUs, 8 GiB RAM**, macOS Da
 All 30 timed jobs matched their serial references. No failure trial missed the five-second target: **5/5 SIGKILL** recoveries, maximum **402.660 ms**, and **3/3 SIGSTOP** recoveries, maximum **2,062.730 ms**. CTest separately exercises both failure modes; these are the repeated measurement-series results, not a universal SLA. The 120-job batch completed with zero failed jobs and every prime count checked.
 
 Five repetitions on a shared laptop are a small sample. CPU scheduling, thermal/power state, background activity, cache warmth, HTTP polling, and increasing total compute threads affect these results. Outliers were retained; configurations ran in order 1, 2, 3. No uncertainty interval or cross-machine speedup is claimed.
+
+### Resume alignment
+
+| Resume capability | Implemented and verified evidence |
+|---|---|
+| C++ coordinator-worker architecture, custom TCP protocol, registry, 3+ nodes | Three logical worker nodes executed partitioned jobs; Linux containers and local processes verified. |
+| Heartbeat failure detection, automatic task recovery, reassignment within 5 seconds | 500 ms heartbeats; all eight repeated trials recovered correctly, with a 2.063 s measured maximum. Process restart remains a supervisor responsibility. |
+| Concurrent queue, dynamic reassignment, load-aware scheduling, 100+ jobs | 120 checked jobs completed; outstanding/slot-ratio selection and occupied/idle slot metrics implemented. No reduced-idle-time claim without a baseline. |
 
 ### Suggested resume bullets
 
