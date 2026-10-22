@@ -3,3 +3,5 @@
 /run/
 /data/*.csv
 .DS_Store
+
+/.netlify/

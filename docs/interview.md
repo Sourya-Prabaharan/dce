@@ -1,40 +1,35 @@
-# Interview walkthrough
+# Design notes
 
-## A concise introduction
+## Why retries need attempt IDs
 
-“I implemented a C++20 coordinator/worker engine with a framed TCP protocol. The coordinator partitions deterministic jobs, tracks worker slots, and distributes tasks to the least-loaded worker relative to capacity. Workers run computation separately from networking. Session and attempt IDs make retries safe: execution is at least once, but only the current attempt can publish a result. I tested three local worker processes, batch submission, and real failures, then measured scaling rather than assuming it.”
+A worker can finish a task and lose its connection before the coordinator receives the result. Retrying that task means it may execute twice. The coordinator assigns a new attempt ID and only accepts a result from the current session and attempt. That makes repeated computation safe for these workloads, which have no external side effects.
 
-Use the measured tables in the README to attach numbers to this description. Describe logical nodes accurately; this test did not involve three physical computers.
+This would not be enough for a task that charges a card or writes to another service. That service would need its own idempotency or transaction mechanism.
 
-## Walk the code in this order
+## Keeping heartbeats responsive
 
-1. `compute.cpp`: show the pure task interface (`JSON task → JSON partial result`). Explain half-open prime ranges and byte-aligned CSV line ownership. Deterministic, side-effect-free kernels make replay acceptable. Parallel Welford aggregation carries sufficient statistics rather than averaging partition means incorrectly.
-2. `protocol.cpp`: a four-byte big-endian length disambiguates messages in a byte stream. `async_read` gathers a full header/body; the write queue prevents frame interleaving and owns buffers through completion. Discuss invalid lengths, partial delivery, bounded queues, and EOF.
-3. `scheduler.cpp`: trace submit → queue → least load/capacity → assignment. A mutex protects queue and state together, so a task cannot be assigned twice by concurrent dispatchers. The actual coordinator uses one event loop; the mutex makes the scheduler independently usable and directly testable.
-4. `worker.cpp`: explain the fixed thread pool and why an infinite compute loop cannot delay the event loop's heartbeat timer. Outstanding work is capped at registered capacity. Session cancellation and waiting for old work before reconnect keep repeated disconnects from creating an unbounded pool queue.
-5. `Scheduler::finish`: show the state/session/attempt acceptance predicate. Then point at tests for duplicate, stale, and malformed replies. Explain why validation happens before releasing slot ownership: otherwise a malformed reply could orphan its task.
-6. `tests/integration.cpp`: show fork/exec of real processes, independent API observations, SIGKILL/SIGSTOP, checked aggregates, every failure trial, and 120 jobs with known prime counts. Contrast this with a unit test that only calls a simulated failure function.
+Workers have one networking thread and a fixed computation pool. Counting primes happens in the pool, so it cannot hold up the heartbeat timer. The number of outstanding assignments is capped at the worker's registered capacity. On disconnect, computations are canceled cooperatively and drain before the next session registers.
 
-## Questions and honest answers
+Heartbeats detect a silent worker. An execution lease handles a different case: a process still sending heartbeats while its computation is stuck. Expiring the lease drops the session and retries its tasks. This is simple, but it can repeat healthy work on that same worker.
 
-**Why not exactly once?** A worker can finish but lose its connection before its result is accepted. A retry can execute the same task again. Exactly-once external effects would need transactional coupling or idempotency keys in the side-effecting system. Here, deterministic computation is safe to repeat and the coordinator accepts at most one authoritative result per task.
+## Scheduling
 
-**What fails when the coordinator crashes?** Jobs and results are lost. Workers reconnect but cannot reconstruct job state. A future design could persist job creation, assignment epochs, and accepted results in a write-ahead log, then replay it before accepting connections. Coordinator HA and consensus are outside this project's scope.
+The scheduler compares outstanding work with capacity. One task fills a one-slot worker but only uses a quarter of a four-slot worker. This rule avoids assigning beyond the advertised slot count, but it doesn't estimate task duration or machine speed.
 
-**Why both heartbeat timeout and execution leases?** A dead process can close its socket immediately. A frozen or unreachable process may leave the connection looking alive, so heartbeats detect that failure. A process can still send heartbeats while a computation is stuck; the hard execution lease bounds that case. ACK deadlines also detect non-started assignments. A lease expiry evicts the session, simplifying resource accounting at the cost of retrying other tasks on that worker.
+The pending queue is FIFO. A large job can delay smaller jobs or retries, and equal-sized prime ranges aren't equally expensive. More partitions help distribute uneven work. A fair queue across jobs and task-time estimates would be useful next steps.
 
-**Why normalize load?** One outstanding task saturates a one-slot worker, but consumes only one quarter of a four-slot worker. The scheduler compares these fractions and never exceeds capacity. It does not predict task runtimes or hardware speed. Show the slot utilization metrics, but do not claim idle-time reduction without comparing to a measured baseline scheduler.
+Slot utilization measures how long the coordinator considers a slot occupied. It includes network time and is not a CPU profiler. The current measurements don't establish an improvement over another scheduler.
 
-**What limits recovery latency?** Detection, the 100 ms sweep, queue position, healthy slot availability, scheduling and network transit. The failure experiment leaves healthy workers available; reported timing includes waiting for a slot and client polling. The two-second heartbeat setting is not a universal recovery guarantee.
+## CSV aggregation
 
-**Why is CSV scaling weaker?** Parsing, file access, allocation, per-task overhead and shared-host resources compete. Short jobs also amplify polling overhead. The CSV benchmark reads a warm shared filesystem cache. Do not attribute a precise bottleneck without profiling; these are plausible explanations, not measured CPU profiles.
+A task owns complete rows whose starting byte offsets fall inside its assigned range. It skips an initial partial row and finishes its last owned row. This avoids splitting a numeric cell between workers.
 
-**Are serial tests independent?** Serial execution uses the same compute kernel over one whole range/file, validating partition and aggregation behavior. Unit tests additionally compare primes with known counts and CSV with manually derived statistics, catching errors a shared kernel alone could hide.
+Each result carries count, mean, and the sum of squared deviations. The coordinator combines them using the parallel Welford formula. Simply averaging partition means would be wrong when partitions have different numbers of values. Subtracting squared sums can also lose precision for values with a large common offset.
 
-**Why not a sieve or Arrow?** Trial division and a strict numeric CSV parser keep the implementation compact and explainable. They perform actual useful arithmetic, but aren't intended to beat specialized numerical engines. Faster kernels could make network and orchestration overhead proportionally larger.
+Serial references use the same kernel over the whole input. They catch partition and merge errors. Known prime counts and manually calculated CSV statistics provide checks that don't rely only on that shared code.
 
-**How would you grow this?** First add persistent jobs/results, authentication, bounded result pagination, immutable input fingerprints, and richer admission control. Then profile before changing the single event loop. Scheduling is currently a linear scan of retained worker sessions per dispatch and FIFO has no inter-job fairness. Larger installations need session pruning, priority/fair queues, backpressure and cancellation, possibly data locality and bandwidth-aware placement.
+## Where this design stops
 
-## Suggested resume bullets
+The coordinator is a single point of failure. Its job state is in memory; workers reconnect after a restart, but the lost jobs do not return. Persistence would need to record submissions and accepted results before acknowledging them, then recover ownership carefully on startup.
 
-Use only the numbers in the saved results; see the README's measured bullets. Always include “local worker processes” or “logical nodes” if describing this demonstration. Do not claim physical multi-node speedup, exactly-once execution, coordinator failover, or reduced idle time.
+Other useful changes would be authentication, immutable input fingerprints, cancellation, and paginated job history. At a larger scale, the worker scan on every dispatch and the single event loop would need profiling. The current three-worker demo doesn't justify adding more infrastructure yet.

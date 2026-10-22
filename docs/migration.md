@@ -10,4 +10,4 @@ The measurements dated October 5 are retained with their original date; they are
 
 ## Public demo publishing
 
-The public site is published from the existing `gh-pages` branch. Its root contains the contents of `website/`, including `demo.html` and the recorded C++ result data. GitHub's branch-based Pages deployment handles publishing; the old custom workflow targeting `main` was removed because the repository's `github-pages` environment permits the established publishing branch instead. No environment protection rules were changed.
+The public demo moved to [Netlify](https://sourya-dce.netlify.app/). See [website notes](website.md) for deployment instructions. The former GitHub Pages URL redirects visitors to Netlify.
