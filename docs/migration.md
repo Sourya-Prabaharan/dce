@@ -7,3 +7,7 @@ The legacy master, workers, protocol, shell, examples, Dockerfiles, and their ou
 The old static portfolio contained legacy examples and a browser simulation. Its replacement describes the actual C++ implementation and measured results and explicitly distinguishes the static GitHub Pages overview from the live coordinator-served dashboard.
 
 The measurements dated October 5 are retained with their original date; they are not new October 22 measurements. See the verification record for subsequent migration checks.
+
+## Public demo publishing
+
+The public site is published from the existing `gh-pages` branch. Its root contains the contents of `website/`, including `demo.html` and the recorded C++ result data. GitHub's branch-based Pages deployment handles publishing; the old custom workflow targeting `main` was removed because the repository's `github-pages` environment permits the established publishing branch instead. No environment protection rules were changed.
